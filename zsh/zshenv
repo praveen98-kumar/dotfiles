@@ -1,0 +1,16 @@
+export XDG_CONFIG_HOME="$HOME/.config"
+export XDG_CACHE_HOME="$HOME/.cache"
+
+export ZDOTDIR="$XDG_CONFIG_HOME/zsh"
+export ZSH_CACHE_DIR="$XDG_CACHE_HOME/zsh"
+
+export DOTFILES=${HOME}/.dotfiles
+
+export LC_ALL=en_IN.UTF-8
+export LANG=en_IN.UTF-8
+
+path+=(
+  /usr/local/bin
+  /usr/local/go/bin/
+  ${HOME}/.local/bin(N-/)
+)

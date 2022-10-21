@@ -1,0 +1,12 @@
+alias c="clear"
+alias vim="nvim"
+alias ls="ls --color"
+alias ll="ls -lah"
+alias la="ls -a"
+alias grep="grep --color=auto"
+alias la="ls -a"
+
+alias del="rm -rf"
+alias md="mkdir -p"
+
+alias g="git"
