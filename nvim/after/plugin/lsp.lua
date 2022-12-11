@@ -108,6 +108,7 @@ local servers = {
   },
   tsserver = {},
   gopls = {},
+  prismals = {},
   tailwindcss = {
     root_dir = root_pattern(
       'tailwind.config.js',
