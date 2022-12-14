@@ -5,7 +5,7 @@ end
 
 lualine.setup {
   options = {
-    theme = 'tokyonight',
+    theme = 'onedark',
     disabled_filetypes = {
       'toggleterm',
       'NvimTree',
