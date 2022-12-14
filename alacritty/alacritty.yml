@@ -8,6 +8,9 @@ env:
 
 window:
   decoration: full
+  padding:
+    x: 5
+    y: 5
   multiplier: 3
   startup_mode: Windowed
 
