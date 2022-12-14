@@ -68,7 +68,7 @@ local function cs(trigger, nodes, opts)
   table.insert(target_table, snippet) -- insert snippet into appropriate table
 end
 
-cs('cl', { t 'console.log(', i(1, ''), t ')' }, { 'jcl', 'jj' })
+cs('log', { t 'console.log(', i(1, ''), t ')' })
 
 cs('imp', fmt('import {} from "{}"', { i(2, ''), i(1, '') }))
 
