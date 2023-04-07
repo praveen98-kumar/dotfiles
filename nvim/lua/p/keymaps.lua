@@ -1,3 +1,10 @@
+local Util = require 'p.utils'
+
+local function map(mode, lhs, rhs, options)
+  options = vim.tbl_deep_extend('force', { noremap = true, silent = true }, options or {})
+  vim.keymap.set(mode, lhs, rhs, options)
+end
+
 -- Remove Search Highlight
 map('n', '<ESC>', ':noh<CR>')
 -- Insert mode to normal mode
@@ -63,20 +70,19 @@ map('v', '<A-k>', ":m '<-2<CR>gv=gv")
 map('i', '<A-j>', '<Esc>:m .+1<CR>==gi')
 map('i', '<A-k>', '<Esc>:m .-2<CR>==gi')
 
--- local timer = vim.loop.new_timer()
--- local function blink()
---   local cnt, blink_times = 0, 8
---   timer:start(
---     0,
---     100,
---     vim.schedule_wrap(function()
---       vim.cmd 'set cursorcolumn! cursorline!'
---       cnt = cnt + 1
---       if cnt == blink_times then
---         timer:stop()
---       end
---     end)
---   )
--- end
---
--- map('n', '<leader>cb', blink)
+if Util.has 'bufferline.nvim' then
+  map('n', '[b', '<cmd>BufferLineCyclePrev<cr>', { desc = 'Prev Buffer' })
+  map('n', ']b', '<cmd>BufferLineCycleNext<cr>', { desc = 'Next Buffer' })
+else
+  map('n', '[b', '<cmd>bprevious<cr>', { desc = 'Prev Buffer' })
+  map('n', ']b', '<cmd>bnext<cr>', { desc = 'Next Buffer' })
+end
+
+if Util.has 'telescope.nvim' then
+  map('n', '<leader>f', function()
+    require('telescope.builtin').current_buffer_fuzzy_find(require('telescope.themes').get_dropdown {
+      winblend = 10,
+      previewer = false,
+    })
+  end, { desc = '[/] Fuzzily search in current buffer' })
+end

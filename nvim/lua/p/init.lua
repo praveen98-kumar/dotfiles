@@ -1,6 +1,4 @@
-require 'p.global'
+require 'p.lazy'
 require 'p.options'
 require 'p.keymaps'
-require 'p.packer'
 require 'p.autocmd'
-require 'p.null-ls'
