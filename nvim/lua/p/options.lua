@@ -23,7 +23,7 @@ opt.smartcase = true
 opt.incsearch = true
 opt.inccommand = 'split'
 opt.errorbells = false
-opt.title = true
+-- opt.title = true
 opt.completeopt = 'menu,menuone,noinsert,noselect'
 opt.clipboard = 'unnamed,unnamedplus'
 
@@ -43,7 +43,7 @@ opt.mouse = 'a'
 opt.cursorline = true
 opt.termguicolors = true
 opt.background = 'dark'
-opt.cmdheight = 1
+opt.cmdheight = 0
 --opt.signcolumn    = "yes"
 opt.laststatus = 3
 opt.winblend = 0
