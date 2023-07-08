@@ -29,10 +29,10 @@ M.cmp_kind = {
 }
 
 M.diagnostics = {
-  Error = ' ',
-  Warn = ' ',
-  Hint = ' ',
-  Info = ' ',
+  Error = ' ',
+  Warn = ' ',
+  Hint = ' ',
+  Info = ' ',
 }
 
 M.border = {
