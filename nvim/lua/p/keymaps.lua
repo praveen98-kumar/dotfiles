@@ -1,23 +1,17 @@
 local Util = require 'p.utils'
 
-local function map(mode, lhs, rhs, options)
-  options = vim.tbl_deep_extend('force', { noremap = true, silent = true }, options or {})
-  vim.keymap.set(mode, lhs, rhs, options)
-end
-
 -- Remove Search Highlight
-map('n', '<ESC>', ':noh<CR>')
+map('n', '<ESC>', ':noh<CR>', { desc = 'Remove Highlight' })
 -- Insert mode to normal mode
-map('i', 'jk', '<ESC>')
+map('i', 'jk', '<ESC>', { desc = 'Better Escape' })
 -- Save file/buffer
-map('i', '<C-s>', '<ESC>:w!<CR>')
-map('n', '<C-s>', ':w!<CR>')
+map({ 'i', 'v', 'n', 'x' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
 
 -- Navigation
-map('n', '<C-h>', '<C-w>h')
-map('n', '<C-l>', '<C-w>l')
-map('n', '<C-j>', '<C-w>j')
-map('n', '<C-k>', '<C-w>k')
+map('n', '<C-h>', '<C-w>h', { desc = 'Go to left window' })
+map('n', '<C-l>', '<C-w>l', { desc = 'Go to right window' })
+map('n', '<C-j>', '<C-w>j', { desc = 'Go to lower window' })
+map('n', '<C-k>', '<C-w>k', { desc = 'Go to upper window' })
 
 -- Do not yank with x
 map('n', 'x', '"_x')
@@ -38,11 +32,11 @@ map('n', '<leader>y', '"+y')
 map('v', '<leader>y', '"+y')
 
 -- Large verticle jump
-map('n', '<C-d>', '<C-d>zz')
-map('n', '<C-u>', '<C-u>zz')
+map('n', '<C-d>', '<C-d>zz', { desc = 'Jump Down' })
+map('n', '<C-u>', '<C-u>zz', { desc = 'Jump Up' })
 
 -- Select all
-map('n', '<C-a>', 'ggVG')
+map('n', '<C-a>', 'ggVG', { desc = 'Select All Content' })
 
 -- Switch splits
 map('n', '<Space>', '<C-w>w')
@@ -58,17 +52,17 @@ map('n', ']d', function()
   vim.diagnostic.goto_next { float = { border = 'rounded' } }
 end)
 
--- Indents
+-- Better Indenting
 map('v', '<', '<gv')
 map('v', '>', '>gv')
 
 -- Move block/lines
-map('n', '<A-j>', ':m .+1<CR>==')
-map('n', '<A-k>', ':m .-2<CR>==')
-map('v', '<A-j>', ":m '>+1<CR>gv=gv")
-map('v', '<A-k>', ":m '<-2<CR>gv=gv")
-map('i', '<A-j>', '<Esc>:m .+1<CR>==gi')
-map('i', '<A-k>', '<Esc>:m .-2<CR>==gi')
+map('n', '<A-j>', ':m .+1<CR>==', { desc = 'Move Down' })
+map('n', '<A-k>', ':m .-2<CR>==', { desc = 'Move Up' })
+map('v', '<A-j>', ":m '>+1<CR>gv=gv", { desc = 'Move Down' })
+map('v', '<A-k>', ":m '<-2<CR>gv=gv", { desc = 'Move Up' })
+map('i', '<A-j>', '<Esc>:m .+1<CR>==gi', { desc = 'Move Down' })
+map('i', '<A-k>', '<Esc>:m .-2<CR>==gi', { desc = 'Move Up' })
 
 if Util.has 'bufferline.nvim' then
   map('n', '[b', '<cmd>BufferLineCyclePrev<cr>', { desc = 'Prev Buffer' })
