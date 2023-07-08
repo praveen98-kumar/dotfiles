@@ -11,9 +11,6 @@ return {
       'jose-elias-alvarez/typescript.nvim',
       {
         'hrsh7th/cmp-nvim-lsp',
-        cond = function()
-          return require('p.utils').has 'nvim-cmp'
-        end,
       },
     },
     ---@class PluginLspOpts
