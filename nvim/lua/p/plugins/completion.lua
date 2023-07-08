@@ -3,13 +3,47 @@ return {
   -- snippets
   {
     'L3MON4D3/LuaSnip',
-    build = (not jit.os:find 'Windows')
-        and "echo -e 'NOTE: jsregexp is optional, so not a big deal if it fails to build\n'; make install_jsregexp"
-      or nil,
-    opts = {
-      history = true,
-      delete_check_events = 'TextChanged',
-    },
+    event = 'InsertEnter',
+    build = 'make install_jsregexp',
+    dependencies = { 'rafamadriz/friendly-snippets' },
+    opts = function()
+      local ls = require 'luasnip'
+      local types = require 'luasnip.util.types'
+      local extras = require 'luasnip.extras'
+      local fmt = require('luasnip.extras.fmt').fmt
+      return {
+        history = false,
+        region_check_events = 'CursorMoved,CursorHold,InsertEnter',
+        delete_check_events = 'TextChanged',
+        ext_opts = {
+          [types.choiceNode] = {
+            active = {
+              hl_mode = 'combine',
+              virt_text = { { '●', 'Operator' } },
+            },
+          },
+          [types.insertNode] = {
+            active = {
+              hl_mode = 'combine',
+              virt_text = { { '●', 'Type' } },
+            },
+          },
+        },
+        enable_autosnippets = true,
+        snip_env = {
+          fmt = fmt,
+          m = extras.match,
+          t = ls.text_node,
+          f = ls.function_node,
+          c = ls.choice_node,
+          d = ls.dynamic_node,
+          i = ls.insert_node,
+          l = extras.lamda,
+          snippet = ls.snippet,
+        },
+      }
+    end,
+
     -- stylua: ignore
     keys = {
       {
@@ -23,8 +57,12 @@ return {
       { "<s-tab>", function() require("luasnip").jump(-1) end, mode = { "i", "s" } },
     },
     config = function(_, opts)
+      require('luasnip.loaders.from_vscode').lazy_load()
       require('luasnip.loaders.from_lua').load { paths = { '~/.config/nvim/snippets/' } }
       require('luasnip').config.set_config(opts)
+      vim.api.nvim_create_user_command('LuaSnipEdit', function()
+        require('luasnip.loaders.from_lua').edit_snippet_files()
+      end, {})
     end,
   },
 
@@ -64,10 +102,10 @@ return {
           }, -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
         },
         sources = cmp.config.sources {
-          { name = 'nvim_lsp' },
-          { name = 'luasnip' },
-          { name = 'buffer' },
-          { name = 'path' },
+          { name = 'nvim_lsp', group_index = 1 },
+          { name = 'luasnip', group_index = 1 },
+          { name = 'buffer', group_index = 2 },
+          { name = 'path', group_index = 1 },
         },
         formatting = {
           format = function(_, item)
