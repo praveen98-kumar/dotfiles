@@ -8,10 +8,10 @@ map('i', 'jk', '<ESC>', { desc = 'Better Escape' })
 map({ 'i', 'v', 'n', 'x' }, '<C-s>', '<cmd>w<cr><esc>', { desc = 'Save File' })
 
 -- Navigation
-map('n', '<C-h>', '<C-w>h', { desc = 'Go to left window' })
-map('n', '<C-l>', '<C-w>l', { desc = 'Go to right window' })
-map('n', '<C-j>', '<C-w>j', { desc = 'Go to lower window' })
-map('n', '<C-k>', '<C-w>k', { desc = 'Go to upper window' })
+-- map('n', '<C-h>', '<C-w>h', { desc = 'Go to left window' })
+-- map('n', '<C-l>', '<C-w>l', { desc = 'Go to right window' })
+-- map('n', '<C-j>', '<C-w>j', { desc = 'Go to lower window' })
+-- map('n', '<C-k>', '<C-w>k', { desc = 'Go to upper window' })
 
 -- Do not yank with x
 map('n', 'x', '"_x')
