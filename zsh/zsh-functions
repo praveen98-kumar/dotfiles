@@ -22,3 +22,27 @@ function colours() {
     fi
   done
 }
+
+fnm_switch_node_version(){
+  local nvmrc_file=".nvmrc"
+  local fnm_installed_version
+
+  if [[ -f $nvmrc_file ]]; then
+      local desired_version=$(cat "$nvmrc_file")
+      fnm_installed_version=$(fnm ls | grep "$desired_version")
+
+      if [[ -n $fnm_installed_version ]]; then
+        local current_version=$(fnm current)
+        if [[ $current_version != "$desired_version" ]]; then
+          echo "Node.js version in .nvmrc is $desired_version. Switching to it..."
+          fnm use "$desired_version"
+        fi
+      else 
+          echo "Node.js  $desired_version version is not installed. Installing..."
+          fnm install "$desired_version"
+          fnm use "$desired_version"
+      fi
+  fi
+}
+autoload -U add-zsh-hook
+add-zsh-hook chpwd fnm_switch_node_version
