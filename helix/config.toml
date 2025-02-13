@@ -3,10 +3,14 @@ theme="tokyonight"
 [editor]
 mouse=true
 cursorline=true
+completion-replace = true
 color-modes=true
 bufferline="multiple"
 line-number = "relative"
+end-of-line-diagnostics = "hint"
 
+[editor.statusline]
+center = ["version-control"]
 [editor.cursor-shape]
 insert="bar"
 normal="block"
@@ -14,9 +18,25 @@ select="underline"
 
 [editor.indent-guides]
 render=true
+character = "╎" # Some characters that work well: "▏", "┆", "┊", "⸽"
+skip-levels = 1
 
 [editor.file-picker]
 hidden = false
+
+[editor.lsp]
+snippets = true
+
+[editor.whitespace.characters]
+space = "·"
+nbsp = "⍽"
+nnbsp = "␣"
+tab = "→"
+newline = "⏎"
+tabpad = "·"
+
+[editor.inline-diagnostics]
+cursor-line = "error"
 
 [keys.normal]
 G = "goto_file_end"
@@ -36,3 +56,6 @@ C-v = [":clipboard-paste-before"]
 
 [keys.select]
 y = [":clipboard-yank", "yank"]
+
+[keys.insert.j]
+k = "normal_mode"
