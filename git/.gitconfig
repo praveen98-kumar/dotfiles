@@ -22,5 +22,5 @@
   colorMoved = default
 [alias]
 	st = status -s
-	lg = log --oneline --graph --decorate
+	lg = log --oneline --graph --decorate --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr) %C(bold blue)<%an>%Creset'
 	br = branch
